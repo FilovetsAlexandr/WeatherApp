@@ -16,6 +16,7 @@
 		F471F9AF2B22021800C5DE47 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F471F9AE2B22021800C5DE47 /* Alamofire */; };
 		F471F9B22B22384E00C5DE47 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = F471F9B12B22384E00C5DE47 /* Kingfisher */; };
 		F471F9B42B22388A00C5DE47 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = F471F9B32B22388A00C5DE47 /* Kingfisher */; };
+		F471F9BA2B23500E00C5DE47 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F471F9B92B23500E00C5DE47 /* ServerManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		F471F99B2B21DA9A00C5DE47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F471F99D2B21DA9A00C5DE47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F471F9A42B21DCD200C5DE47 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		F471F9B92B23500E00C5DE47 /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				F471F9A42B21DCD200C5DE47 /* WeatherData.swift */,
+				F471F9B92B23500E00C5DE47 /* ServerManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F471F9BA2B23500E00C5DE47 /* ServerManager.swift in Sources */,
 				F471F9942B21DA9700C5DE47 /* MainVC.swift in Sources */,
 				F471F9902B21DA9700C5DE47 /* AppDelegate.swift in Sources */,
 				F471F9A52B21DCD200C5DE47 /* WeatherData.swift in Sources */,
