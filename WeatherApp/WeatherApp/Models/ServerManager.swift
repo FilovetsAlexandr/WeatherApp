@@ -32,12 +32,14 @@ final class ServerManager {
         }
     }
     
-    func updateUI(with weatherData: Weather, temperatureLabel: UILabel, weatherIconImageView: UIImageView) {
+    func updateUI(with weatherData: Weather, cityLabel: UILabel, temperatureLabel: UILabel, weatherIconImageView: UIImageView) {
+        let city = weatherData.name
+        let countryCode = weatherData.sys.country
         let temperature = weatherData.main.temp
-
+        
         DispatchQueue.main.async {
             temperatureLabel.text = "\(temperature)°C"
-
+            cityLabel.text = ("\(city), \(countryCode)")
             if let weatherElement = weatherData.weather.first {
                 let iconURLString = "https://openweathermap.org/img/wn/\(weatherElement.icon)@2x.png"
                 if let iconURL = URL(string: iconURLString) {

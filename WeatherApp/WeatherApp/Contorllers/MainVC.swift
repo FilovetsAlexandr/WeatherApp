@@ -13,6 +13,7 @@ final class MainVC: UIViewController, CLLocationManagerDelegate {
     // MARK: - Properties
 
     private var temperatureLabel: UILabel!
+    private var cityLabel: UILabel!
     private var weatherIconImageView: UIImageView!
     private var weatherData: Weather?
     
@@ -36,7 +37,15 @@ final class MainVC: UIViewController, CLLocationManagerDelegate {
         temperatureLabel.center = view.center
         temperatureLabel.textAlignment = .center
         temperatureLabel.font = UIFont.systemFont(ofSize: 24)
+        temperatureLabel.numberOfLines = 0
         view.addSubview(temperatureLabel)
+
+        cityLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+        cityLabel.center = CGPoint(x: view.center.x, y: view.center.y + 50)
+        cityLabel.textAlignment = .center
+        cityLabel.font = UIFont.systemFont(ofSize: 18)
+        cityLabel.numberOfLines = 0
+        view.addSubview(cityLabel)
 
         weatherIconImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         weatherIconImageView.center = CGPoint(x: view.center.x, y: view.center.y - 100)
@@ -84,6 +93,6 @@ final class MainVC: UIViewController, CLLocationManagerDelegate {
 
     private func updateUI(with weatherData: Weather) {
         self.weatherData = weatherData
-        serverManager.updateUI(with: weatherData, temperatureLabel: temperatureLabel, weatherIconImageView: weatherIconImageView)
+        serverManager.updateUI(with: weatherData, cityLabel: cityLabel, temperatureLabel: temperatureLabel, weatherIconImageView: weatherIconImageView)
     }
 }
