@@ -31,6 +31,25 @@ final class ServerManager {
             }
         }
     }
+    func getWeatherfor(city: String, completion: @escaping (Weather?) -> Void) {
+        let encodedCity = city.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let urlString = "https://api.openweathermap.org/data/2.5/weather?q=\(encodedCity)&appid=\(apiKey)&units=metric"
+
+        AF.request(urlString).responseData { response in
+            if let data = response.data {
+                do {
+                    let decoder = JSONDecoder()
+                    let weatherData = try decoder.decode(Weather.self, from: data)
+                    completion(weatherData)
+                } catch {
+                    print("Ошибка декодирования данных о погоде: \(error.localizedDescription)")
+                    completion(nil)
+                }
+            } else {
+                completion(nil)
+            }
+        }
+    }
     
     func updateUI(with weatherData: Weather, cityLabel: UILabel, temperatureLabel: UILabel, weatherIconImageView: UIImageView) {
         let city = weatherData.name

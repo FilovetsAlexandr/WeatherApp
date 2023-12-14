@@ -16,7 +16,9 @@ final class MainVC: UIViewController, CLLocationManagerDelegate {
     private var cityLabel: UILabel!
     private var weatherIconImageView: UIImageView!
     private var weatherData: Weather?
+    private var shouldUpdateWeatherBasedOnLocation = true
     
+    private let activityIndicator = UIActivityIndicatorView(style: .medium)
     private let locationManager = CLLocationManager()
     private let serverManager = ServerManager()
 
@@ -33,6 +35,13 @@ final class MainVC: UIViewController, CLLocationManagerDelegate {
     // MARK: - Setup UI
 
     private func setupUI() {
+        // Button
+        let changeCityButton = UIButton(type: .system)
+        changeCityButton.frame = CGRect(x: 50, y: 50, width: 100, height: 50)
+        changeCityButton.setTitle("Change City", for: .normal)
+        changeCityButton.addTarget(self, action: #selector(changeCityButtonTapped), for: .touchUpInside)
+        view.addSubview(changeCityButton)
+        // Labels
         temperatureLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
         temperatureLabel.center = view.center
         temperatureLabel.textAlignment = .center
@@ -54,7 +63,7 @@ final class MainVC: UIViewController, CLLocationManagerDelegate {
         /// FORECAST
         
         let forecastLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
-        forecastLabel.center = CGPoint(x: view.center.x, y: view.center.y + 200)
+        forecastLabel.center = CGPoint(x: view.center.x, y: view.center.y + 120)
         forecastLabel.textAlignment = .center
         forecastLabel.font = UIFont.systemFont(ofSize: 18)
         forecastLabel.numberOfLines = 0
@@ -214,12 +223,14 @@ final class MainVC: UIViewController, CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            let latitude = location.coordinate.latitude
-            let longitude = location.coordinate.longitude
-            serverManager.getWeatherData(latitude: latitude, longitude: longitude) { [weak self] weatherData in
+        guard let location = locations.last else { return }
+        
+        if shouldUpdateWeatherBasedOnLocation {
+            serverManager.getWeatherData(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { [weak self] weatherData in
                 if let weatherData = weatherData {
-                    self?.updateUI(with: weatherData)
+                    DispatchQueue.main.async {
+                        self?.updateUI(with: weatherData)
+                    }
                 }
             }
         }
@@ -229,8 +240,48 @@ final class MainVC: UIViewController, CLLocationManagerDelegate {
 
     // MARK: - UI Update
 
+    @objc func changeCityButtonTapped() {
+        let alert = UIAlertController(title: "City", message: "Enter city name", preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.placeholder = "City Name"
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] action in
+            if let textField = alert.textFields?.first, let cityName = textField.text {
+                self?.activityIndicator.startAnimating()
+                self?.serverManager.getWeatherfor(city: cityName) { [weak self] weatherData in
+                    self?.activityIndicator.stopAnimating()
+                    if let weatherData = weatherData {
+                        DispatchQueue.main.async {
+                            self?.updateUI(with: weatherData)
+                        }
+                    } else {
+                        // Обработка случая, когда не удалось получить данные о погоде
+                        // Например, отображение сообщения об ошибке пользователю
+                    }
+                }
+            }
+        }
+        alert.addAction(okAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+
     private func updateUI(with weatherData: Weather) {
         self.weatherData = weatherData
-        serverManager.updateUI(with: weatherData, cityLabel: cityLabel, temperatureLabel: temperatureLabel, weatherIconImageView: weatherIconImageView)
+        DispatchQueue.main.async {
+            self.temperatureLabel.text = "\(weatherData.main.temp)°C"
+            self.cityLabel.text = "\(weatherData.name), \(weatherData.sys.country)"
+            if let weatherElement = weatherData.weather.first {
+                let iconURLString = "https://openweathermap.org/img/wn/\(weatherElement.icon)@2x.png"
+                if let iconURL = URL(string: iconURLString) {
+                    self.weatherIconImageView.kf.setImage(with: iconURL)
+                }
+            }
+        }
+        shouldUpdateWeatherBasedOnLocation = false
     }
 }
