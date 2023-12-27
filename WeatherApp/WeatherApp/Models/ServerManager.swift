@@ -31,10 +31,10 @@ final class ServerManager {
             }
         }
     }
-    func getWeatherfor(city: String, completion: @escaping (Weather?) -> Void) {
+    func getWeatherForCity(city: String, completion: @escaping (Weather?) -> Void) {
         let encodedCity = city.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         let urlString = "https://api.openweathermap.org/data/2.5/weather?q=\(encodedCity)&appid=\(apiKey)&units=metric"
-
+        
         AF.request(urlString).responseData { response in
             if let data = response.data {
                 do {
@@ -51,20 +51,41 @@ final class ServerManager {
         }
     }
     
-    func updateUI(with weatherData: Weather, cityLabel: UILabel, temperatureLabel: UILabel, weatherIconImageView: UIImageView) {
-        let city = weatherData.name
-        let countryCode = weatherData.sys.country
-        let temperature = weatherData.main.temp
-        
-        DispatchQueue.main.async {
-            temperatureLabel.text = "\(temperature)°C"
-            cityLabel.text = ("\(city), \(countryCode)")
-            if let weatherElement = weatherData.weather.first {
-                let iconURLString = "https://openweathermap.org/img/wn/\(weatherElement.icon)@2x.png"
-                if let iconURL = URL(string: iconURLString) {
-                    weatherIconImageView.kf.setImage(with: iconURL)
+    func getWeatherForecast(for city: String, completion: @escaping ([Forecast.List]?) -> Void) {
+        let encodedCity = city.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let urlString = "https://api.openweathermap.org/data/2.5/forecast?q=\(encodedCity)&appid=\(apiKey)"
+
+        AF.request(urlString).responseData { response in
+            if let data = response.data {
+                do {
+                    let decoder = JSONDecoder()
+                    let forecastData = try decoder.decode(Forecast.self, from: data)
+                    // Получаем только первые шесть элементов из массива
+                    let limitedList = Array(forecastData.list.prefix(6))
+                    completion(limitedList)
+                } catch {
+                    print("Ошибка декодирования данных о прогнозе погоды: \(error.localizedDescription)")
+                    completion(nil)
                 }
+            } else {
+                completion(nil)
             }
         }
     }
+            func updateUI(with weatherData: Weather, cityLabel: UILabel, temperatureLabel: UILabel, weatherIconImageView: UIImageView) {
+                let city = weatherData.name
+                let countryCode = weatherData.sys.country
+                let temperature = weatherData.main.temp
+                
+                DispatchQueue.main.async {
+                    temperatureLabel.text = "\(temperature)°C"
+                    cityLabel.text = ("\(city), \(countryCode)")
+                    if let weatherElement = weatherData.weather.first {
+                        let iconURLString = "https://openweathermap.org/img/wn/\(weatherElement.icon)@2x.png"
+                        if let iconURL = URL(string: iconURLString) {
+                            weatherIconImageView.kf.setImage(with: iconURL)
+                        }
+                    }
+                }
+            }
 }

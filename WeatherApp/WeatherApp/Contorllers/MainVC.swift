@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreLocation
+import Kingfisher
 
 final class MainVC: UIViewController, CLLocationManagerDelegate {
 
@@ -27,7 +28,7 @@ final class MainVC: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+     
         setupUI()
         setupLocationManager()
     }
@@ -63,140 +64,13 @@ final class MainVC: UIViewController, CLLocationManagerDelegate {
         /// FORECAST
         
         let forecastLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
-        forecastLabel.center = CGPoint(x: view.center.x, y: view.center.y + 120)
+        forecastLabel.center = CGPoint(x: view.center.x, y: view.center.y + 240)
         forecastLabel.textAlignment = .center
         forecastLabel.font = UIFont.systemFont(ofSize: 18)
         forecastLabel.numberOfLines = 0
         forecastLabel.lineBreakMode = .byWordWrapping
-        forecastLabel.text = "Weather forecast for the next 6 hours"
+        forecastLabel.text = "Weather forecast for the next hours"
         view.addSubview(forecastLabel)
-        
-        // firstForecast +1 hour
-        
-        let firstForecastView = UIImageView(frame: CGRect(x: 16, y: 650, width: 30, height: 30))
-        firstForecastView.contentMode = .scaleAspectFit
-        firstForecastView.image = UIImage(named: "test_image_1")
-        view.addSubview(firstForecastView)
-
-        let firstTimeForecast = UILabel(frame: CGRect(x: 16, y: 650 - 20, width: 30, height: 20))
-        firstTimeForecast.textAlignment = .center
-        firstTimeForecast.font = UIFont.systemFont(ofSize: 12)
-        firstTimeForecast.textColor = .black
-        firstTimeForecast.text = "+1"
-        view.addSubview(firstTimeForecast)
-
-        let firstTemperatureForecast = UILabel(frame: CGRect(x: 16, y: 650 + 30, width: 30, height: 20))
-        firstTemperatureForecast.textAlignment = .center
-        firstTemperatureForecast.font = UIFont.systemFont(ofSize: 12)
-        firstTemperatureForecast.textColor = .black
-        firstTemperatureForecast.text = "25°C"
-        view.addSubview(firstTemperatureForecast)
-        
-        // secondForecast +2 hour
-        
-        let secondForecastView = UIImageView(frame: CGRect(x: 80, y: 650, width: 30, height: 30))
-        secondForecastView.contentMode = .scaleAspectFit
-        secondForecastView.image = UIImage(named: "test_image_1")
-        view.addSubview(secondForecastView)
-
-        let secondTimeForecast = UILabel(frame: CGRect(x: 80, y: 650 - 20, width: 30, height: 20))
-        secondTimeForecast.textAlignment = .center
-        secondTimeForecast.font = UIFont.systemFont(ofSize: 12)
-        secondTimeForecast.textColor = .black
-        secondTimeForecast.text = "+2"
-        view.addSubview(secondTimeForecast)
-
-        let secondTemperatureForecast = UILabel(frame: CGRect(x: 80, y: 650 + 30, width: 30, height: 20))
-        secondTemperatureForecast.textAlignment = .center
-        secondTemperatureForecast.font = UIFont.systemFont(ofSize: 12)
-        secondTemperatureForecast.textColor = .black
-        secondTemperatureForecast.text = "25°C"
-        view.addSubview(secondTemperatureForecast)
-        
-        // thirdForecast +3 hour
-        
-        let thirdForecastView = UIImageView(frame: CGRect(x: 144, y: 650, width: 30, height: 30))
-        thirdForecastView.contentMode = .scaleAspectFit
-        thirdForecastView.image = UIImage(named: "test_image_1")
-        view.addSubview(thirdForecastView)
-
-        let thirdTimeForecast = UILabel(frame: CGRect(x: 144, y: 650 - 20, width: 30, height: 20))
-        thirdTimeForecast.textAlignment = .center
-        thirdTimeForecast.font = UIFont.systemFont(ofSize: 12)
-        thirdTimeForecast.textColor = .black
-        thirdTimeForecast.text = "+3"
-        view.addSubview(thirdTimeForecast)
-
-        let thirdTemperatureForecast = UILabel(frame: CGRect(x: 144, y: 650 + 30, width: 30, height: 20))
-        thirdTemperatureForecast.textAlignment = .center
-        thirdTemperatureForecast.font = UIFont.systemFont(ofSize: 12)
-        thirdTemperatureForecast.textColor = .black
-        thirdTemperatureForecast.text = "25°C"
-        view.addSubview(thirdTemperatureForecast)
-        
-        // fourthForecast +4 hour
-        
-        let fourthForecastView = UIImageView(frame: CGRect(x: 208, y: 650, width: 30, height: 30))
-        fourthForecastView.contentMode = .scaleAspectFit
-        fourthForecastView.image = UIImage(named: "test_image_1")
-        view.addSubview(fourthForecastView)
-
-        let fourthTimeForecast = UILabel(frame: CGRect(x: 208, y: 650 - 20, width: 30, height: 20))
-        fourthTimeForecast.textAlignment = .center
-        fourthTimeForecast.font = UIFont.systemFont(ofSize: 12)
-        fourthTimeForecast.textColor = .black
-        fourthTimeForecast.text = "+4"
-        view.addSubview(fourthTimeForecast)
-
-        let fourthTemperatureForecast = UILabel(frame: CGRect(x: 208, y: 650 + 30, width: 30, height: 20))
-        fourthTemperatureForecast.textAlignment = .center
-        fourthTemperatureForecast.font = UIFont.systemFont(ofSize: 12)
-        fourthTemperatureForecast.textColor = .black
-        fourthTemperatureForecast.text = "25°C"
-        view.addSubview(fourthTemperatureForecast)
-        
-        // fifthForecast +5 hour
-        
-        let fifthForecastView = UIImageView(frame: CGRect(x: 272, y: 650, width: 30, height: 30))
-        fifthForecastView.contentMode = .scaleAspectFit
-        fifthForecastView.image = UIImage(named: "test_image_1")
-        view.addSubview(fifthForecastView)
-
-        let fifthTimeForecast = UILabel(frame: CGRect(x: 272, y: 650 - 20, width: 30, height: 20))
-        fifthTimeForecast.textAlignment = .center
-        fifthTimeForecast.font = UIFont.systemFont(ofSize: 12)
-        fifthTimeForecast.textColor = .black
-        fifthTimeForecast.text = "+5"
-        view.addSubview(fifthTimeForecast)
-
-        let fifthTemperatureForecast = UILabel(frame: CGRect(x: 272, y: 650 + 30, width: 30, height: 20))
-        fifthTemperatureForecast.textAlignment = .center
-        fifthTemperatureForecast.font = UIFont.systemFont(ofSize: 12)
-        fifthTemperatureForecast.textColor = .black
-        fifthTemperatureForecast.text = "25°C"
-        view.addSubview(fifthTemperatureForecast)
-        
-        // sixthForecast +6 hour
-        
-        let sixthForecastView = UIImageView(frame: CGRect(x: 336, y: 650, width: 30, height: 30))
-        sixthForecastView.contentMode = .scaleAspectFit
-        sixthForecastView.image = UIImage(named: "test_image_1")
-        view.addSubview(sixthForecastView)
-
-        let sixthTimeForecast = UILabel(frame: CGRect(x: 336, y: 650 - 20, width: 30, height: 20))
-        sixthTimeForecast.textAlignment = .center
-        sixthTimeForecast.font = UIFont.systemFont(ofSize: 12)
-        sixthTimeForecast.textColor = .black
-        sixthTimeForecast.text = "+6"
-        view.addSubview(sixthTimeForecast)
-
-        let sixthTemperatureForecast = UILabel(frame: CGRect(x: 336, y: 650 + 30, width: 30, height: 20))
-        sixthTemperatureForecast.textAlignment = .center
-        sixthTemperatureForecast.font = UIFont.systemFont(ofSize: 12)
-        sixthTemperatureForecast.textColor = .black
-        sixthTemperatureForecast.text = "25°C"
-        view.addSubview(sixthTemperatureForecast)
-        
     }
 
     // MARK: - Setup Location Manager
@@ -245,18 +119,34 @@ final class MainVC: UIViewController, CLLocationManagerDelegate {
         alert.addTextField { textField in
             textField.placeholder = "City Name"
         }
-        
+
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(cancelAction)
-        
+
         let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] action in
             if let textField = alert.textFields?.first, let cityName = textField.text {
                 self?.activityIndicator.startAnimating()
-                self?.serverManager.getWeatherfor(city: cityName) { [weak self] weatherData in
+
+                self?.serverManager.getWeatherForCity(city: cityName) { [weak self] weatherData in
                     self?.activityIndicator.stopAnimating()
+
                     if let weatherData = weatherData {
+                        // Обновление интерфейса с данными о текущей погоде
                         DispatchQueue.main.async {
                             self?.updateUI(with: weatherData)
+                        }
+
+                        // Запрос прогноза погоды
+                        self?.serverManager.getWeatherForecast(for: cityName) { forecastList in
+                            if let forecastList = forecastList {
+                                // Обновление интерфейса с данными о прогнозе погоды
+                                DispatchQueue.main.async {
+                                    self?.updateForecastUI(with: forecastList)
+                                }
+                            } else {
+                                // Обработка случая, когда не удалось получить прогноз погоды
+                                // Например, отображение сообщения об ошибке пользователю
+                            }
                         }
                     } else {
                         // Обработка случая, когда не удалось получить данные о погоде
@@ -266,7 +156,7 @@ final class MainVC: UIViewController, CLLocationManagerDelegate {
             }
         }
         alert.addAction(okAction)
-        
+
         present(alert, animated: true, completion: nil)
     }
 
@@ -283,5 +173,55 @@ final class MainVC: UIViewController, CLLocationManagerDelegate {
             }
         }
         shouldUpdateWeatherBasedOnLocation = false
+    }
+
+    func updateForecastUI(with forecastList: [Forecast.List]) {
+        // Очищаем предыдущие представления с прогнозом погоды
+        for subview in self.view.subviews {
+            if subview.tag == 100 {
+                subview.removeFromSuperview()
+            }
+        }
+
+        let xOffset: CGFloat = 16
+        let yOffset: CGFloat = self.view.bounds.height - 150
+        let spacing: CGFloat = 80
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+
+        for (index, forecast) in forecastList.enumerated() {
+            let xPosition = xOffset + CGFloat(index) * spacing
+
+            // Создание представления с изображением погоды
+            if let weather = forecast.weather.first, let iconURL = URL(string: "https://openweathermap.org/img/w/\(weather.icon).png") {
+                let imageView = UIImageView(frame: CGRect(x: xPosition + 10, y: yOffset, width: 30, height: 30))
+                imageView.contentMode = .scaleAspectFit
+                imageView.kf.setImage(with: iconURL)
+                imageView.tag = 100 // Используем тег для последующего удаления представлений
+                self.view.addSubview(imageView)
+            }
+
+            // Создание метки со временем
+            let timeLabel = UILabel(frame: CGRect(x: xPosition, y: yOffset - 25, width: 60, height: 20))
+            timeLabel.textAlignment = .center
+            timeLabel.font = UIFont.systemFont(ofSize: 12)
+            timeLabel.textColor = .black
+            let date = Date(timeIntervalSince1970: TimeInterval(forecast.dt))
+            timeLabel.text = dateFormatter.string(from: date)
+            timeLabel.tag = 100 // Используем тег для последующего удаления представлений
+            self.view.addSubview(timeLabel)
+
+            // Создание метки с температурой
+            let temperatureLabel = UILabel(frame: CGRect(x: xPosition, y: yOffset + 40, width: 60, height: 20))
+            temperatureLabel.textAlignment = .center
+            temperatureLabel.font = UIFont.systemFont(ofSize: 12)
+            temperatureLabel.textColor = .black
+            let temperatureCelsius = forecast.main.temp - 273.15
+            let roundedTemperature = String(format: "%.2f", temperatureCelsius)
+            temperatureLabel.text = "\(roundedTemperature)°C"
+            temperatureLabel.tag = 100 // Используем тег для последующего удаления представлений
+            self.view.addSubview(temperatureLabel)
+        }
     }
 }

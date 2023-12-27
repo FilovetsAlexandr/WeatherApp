@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F433E1E42B2B916100330B32 /* ForecastData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F433E1E32B2B916100330B32 /* ForecastData.swift */; };
 		F471F9902B21DA9700C5DE47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F471F98F2B21DA9700C5DE47 /* AppDelegate.swift */; };
 		F471F9922B21DA9700C5DE47 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F471F9912B21DA9700C5DE47 /* SceneDelegate.swift */; };
 		F471F9942B21DA9700C5DE47 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F471F9932B21DA9700C5DE47 /* MainVC.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F433E1E32B2B916100330B32 /* ForecastData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastData.swift; sourceTree = "<group>"; };
 		F471F98C2B21DA9700C5DE47 /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F471F98F2B21DA9700C5DE47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F471F9912B21DA9700C5DE47 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,8 +88,9 @@
 		F471F9A62B21DCDD00C5DE47 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F471F9A42B21DCD200C5DE47 /* WeatherData.swift */,
 				F471F9B92B23500E00C5DE47 /* ServerManager.swift */,
+				F433E1E32B2B916100330B32 /* ForecastData.swift */,
+				F471F9A42B21DCD200C5DE47 /* WeatherData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				F471F9942B21DA9700C5DE47 /* MainVC.swift in Sources */,
 				F471F9902B21DA9700C5DE47 /* AppDelegate.swift in Sources */,
 				F471F9A52B21DCD200C5DE47 /* WeatherData.swift in Sources */,
+				F433E1E42B2B916100330B32 /* ForecastData.swift in Sources */,
 				F471F9922B21DA9700C5DE47 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
